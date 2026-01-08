@@ -47,6 +47,7 @@ Clone the Repository
 git clone https://github.com/<your-username>/problem-difficulty-prediction.git
 cd problem-difficulty-prediction
 
+# if you are not able to download models from this repository then use this G-Drive Link to download.
 # Download the  models directory from the Google drive
         https://drive.google.com/drive/folders/1ytCWJNTxS5la3e_qygF6Aq2SHvAPSasJ?usp=drive_link
    
