@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem Difficulty Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .container {
+            width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            resize: none;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .desc-box {
+            height: 180px;
+        }
+
+        .row {
+           display: flex;
+           justify-content: space-between;
+           gap: 40px;              
+           margin-top: 25px;
+        }
+        .row > div {
+            width: 48%;
+        }
+
+
+        .small-box {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            background-color: #fafafa;
+        }
+
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .btn {
+            margin-top: 25px;
+            display: block;
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Programming Problem Difficulty Predictor</h2>
+
+    <form action="/predict" method="post">
+
+        <label class="label">Description</label>
+        <textarea class="desc-box" name="description"
+            placeholder="Enter Problem description here..."></textarea>
+
+        <div class="row">
+            <div>
+                <label class="label">Input Description</label>
+                <textarea class="small-box" name="input_description"
+                    placeholder="Enter Input description..."></textarea>
+            </div>
+
+            <div>
+                <label class="label">Output Description</label>
+                <textarea class="small-box" name="output_description"
+                    placeholder="Enter Output description..."></textarea>
+            </div>
+        </div>
+
+        <button class="btn" type="submit">Predict</button>
+    </form>
+</div>
+
+</body>
+</html>
