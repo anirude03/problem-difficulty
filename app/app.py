@@ -5,9 +5,9 @@ import re
 from scipy.sparse import hstack
 from feature_config import NUMERIC_FEATURE_NAMES
 
-# -----------------------------
+
 # Load models & preprocessors
-# -----------------------------
+
 BASE_MODEL_PATH = "/models"
 
 classifier = joblib.load(f"{BASE_MODEL_PATH}/classifier.pkl")
@@ -15,15 +15,13 @@ regressor = joblib.load(f"{BASE_MODEL_PATH}/regressor.pkl")
 tfidf = joblib.load(f"{BASE_MODEL_PATH}/tfidf_vectorizer.pkl")
 scaler = joblib.load(f"{BASE_MODEL_PATH}/numeric_scaler.pkl")
 
-# -----------------------------
+
 # Flask app
-# -----------------------------
+
 app = Flask(__name__)
 
-# -----------------------------
-# Text cleaning
-# -----------------------------
 
+# Text cleaning
 
 def clean_text(text):
     text = text.lower()
@@ -32,17 +30,9 @@ def clean_text(text):
     return text.strip()
 
 
-# -----------------------------
-# Feature engineering
-# -----------------------------
-
-
 def extract_features(full_text, clean_txt):
     features = {}
 
-    # -----------------------
-    # Base numeric features
-    # -----------------------
     features["text_length"] = len(clean_txt)
     features["word_count"] = len(clean_txt.split())
     features["digit_count"] = sum(c.isdigit() for c in full_text)
@@ -72,9 +62,8 @@ def extract_features(full_text, clean_txt):
     features["array_matrix_flag"] = int(
         "array" in clean_txt or "matrix" in clean_txt or "[" in full_text)
 
-    # -----------------------
     # Keyword counts
-    # -----------------------
+
     features["kw_dp"] = clean_txt.count("dp")
     features["kw_dynamic_programming"] = clean_txt.count("dynamic programming")
     features["kw_graph"] = clean_txt.count("graph")
@@ -85,9 +74,6 @@ def extract_features(full_text, clean_txt):
     features["kw_dfs"] = clean_txt.count("dfs")
     features["kw_bfs"] = clean_txt.count("bfs")
 
-    # -----------------------
-    # Algorithm flags
-    # -----------------------
     features["algo_dp"] = int(
         "dp" in clean_txt or "dynamic programming" in clean_txt)
     features["algo_graph"] = int("graph" in clean_txt)
@@ -97,9 +83,6 @@ def extract_features(full_text, clean_txt):
     features["algo_bit"] = int("bit" in clean_txt or "xor" in clean_txt)
     features["algo_string"] = int("string" in clean_txt)
 
-    # -----------------------
-    # FINAL: strict ordering
-    # -----------------------
     numeric_array = np.array(
         [features[name] for name in NUMERIC_FEATURE_NAMES],
         dtype=float
@@ -108,9 +91,8 @@ def extract_features(full_text, clean_txt):
     return numeric_array
 
 
-# -----------------------------
 # Routes
-# -----------------------------
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -154,8 +136,6 @@ def predict():
     )
 
 
-# -----------------------------
 # Run app
-# -----------------------------
 if __name__ == "__main__":
     app.run(debug=True)
