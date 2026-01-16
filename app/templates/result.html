@@ -45,8 +45,8 @@
     {% if error %}
         <p class="error">{{ error }}</p>
     {% else %}
-        <p class="result"><strong>Predicted Difficulty:</strong> {{ difficulty }}</p>
-        <p class="result"><strong>Predicted Score:</strong> {{ score }}</p>
+        <p class="result"><strong>Predicted Class:</strong> {{ predicted_class }}</p>
+        <p class="result"><strong>Predicted Score:</strong> {{ predicted_score }}</p>
     {% endif %}
 
     <a href="/"> Try Another Problem</a>
